@@ -1,0 +1,7 @@
+alias ls='ls -Gh'
+alias l='ls -Glh'
+alias ll='ls -Gla'
+alias htop='sudo htop'
+alias vg='vagrant'
+alias vst='vagrant up && vagrant ssh -c "tmux -CC"'
+alias g='git'

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - copy: src={{ item }} dest=~/.{{ item }}
+      with_items:
+        - bashrc
+        - bash_profile
+        - bash_aliases
+        - 'git-prompt.sh'
+        - 'git-completion.bash'
