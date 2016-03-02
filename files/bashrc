@@ -33,6 +33,6 @@ set_prompt () {
   # Print the working directory in yellow, date in dark-gray and reset
   # the text color to the default.
   PS1+="$LigthGray\\w$Cyan$GitState\n"
-  PS1+="$Gray$(date +%H:%M)$Reset $ "
+  PS1+="$Gray\A$Reset $ "
 }
 PROMPT_COMMAND='set_prompt'
