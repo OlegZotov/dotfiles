@@ -2,6 +2,11 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
+# Appending history instead of rewriting
+shopt -s histappend
+# Turn off suspend and resume terminal feature - now we can use Ctrl+s as Ctrl+r but in opposite direction
+stty -ixon
+
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 set_prompt () {
