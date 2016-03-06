@@ -2,42 +2,50 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-# Appending history instead of rewriting
-shopt -s histappend
 # Turn off suspend and resume terminal feature - now we can use Ctrl+s as Ctrl+r but in opposite direction
 stty -ixon
 
-source ~/.git-completion.bash
+# Turn on extended glob patterns: ?() *() +() @() !()
+shopt -s extglob
+
+############# History configuration #################
+
+# Appending history instead of rewriting
+shopt -s histappend
+
+# Ignore duplicates while appending and erase duplicates from old history
+HISTCONTROL=ignoredups:erasedups
+
+# Ignore aliases and some other patterns when write history
+HISTIGNORE="$(alias | cut -d' ' -f2 | cut -d'=' -f1 | tr '\n' ':')[bf]g:exit:pwd:ls:cd:vi"
+
+############# Prompt configuration #################
+
+# Show only two last directories in prompt, affect on \w and \W codes
+PROMPT_DIRTRIM=2
+
 source ~/.git-prompt.sh
+# Show unstaged (*) and staged (+) changes next to the branch name.
+GIT_PS1_SHOWDIRTYSTATE=1
+# If something is stashed, then a '$' will be shown next to the branch name.
+GIT_PS1_SHOWSTASHSTATE=1
+# If there're untracked files, then a '%' will be shown next to the branch name.
+GIT_PS1_SHOWUNTRACKEDFILES=1
+# Show the difference between HEAD and its upstream with number of commits ahead/behind (+/-) upstream
+GIT_PS1_SHOWUPSTREAM="auto verbose"
+
 set_prompt () {
-  Last_Command=$? # Must come first!
-  LigthGray='\[\e[37m\]'
-  White='\[\e[97m\]'
-  Gray='\[\e[90m\]'
-  Green='\[\e[32m\]'
-  Red='\[\e[31m\]'
-  Cyan='\[\e[36m\]'
-  Reset='\[\e[00m\]'
-  FancyX='\342\234\227'
-  Checkmark='\342\234\223'
+  # Real-time history synchronization between the terminals
+  history -n; # Append the history lines not already read from the history file to the current history list.
+  history -w; # Write out the current history list to the history file.
+  history -c; # Clear the history list. This may be combined with the other options to replace the history list completely.
+  history -r; # Read the history file and append its contents to the history list.
 
-  # Add a bright white exit status for the last command
-  PS1="$White\$? "
-  # If it was successful, print a green check mark. Otherwise, print
-  # a red X.
-  if [[ $Last_Command == 0 ]]; then
-    PS1+="$Green$Checkmark "
-  else
-    PS1+="$Red$FancyX "
-  fi
-
-  GIT_PS1_SHOWDIRTYSTATE=1
-  GIT_PS1_SHOWUNTRACKEDFILES=1
-  GIT_PS1_SHOWUPSTREAM="auto verbose"
-  GitState=$(__git_ps1)
-  # Print the working directory in yellow, date in dark-gray and reset
-  # the text color to the default.
-  PS1+="$LigthGray\\w$Cyan$GitState\n"
-  PS1+="$Gray\A$Reset $ "
+  gray='\[\e[37m\]'
+  cyan='\[\e[36m\]'
+  reset='\[\e[00m\]'
+  PS1="$gray\\w$cyan$(__git_ps1)$reset $ "
 }
-PROMPT_COMMAND='set_prompt'
+PROMPT_COMMAND=set_prompt
+
+source ~/.git-completion.bash
