@@ -1,10 +1,13 @@
 ---
 - hosts: all
   tasks:
-    - copy: src={{ item }} dest=~/.{{ item }} backup=yes
+    - copy: src={{ item }} dest=~/.{{ item }}
+      with_items:
+        - 'git-prompt.sh'
+
+    - file: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} state=link force=yes
       with_items:
         - bashrc
+        - inputrc
         - bash_profile
         - bash_aliases
-        - 'git-prompt.sh'
-        - 'git-completion.bash'

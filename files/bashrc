@@ -21,10 +21,12 @@ HISTIGNORE="$(alias | cut -d' ' -f2 | cut -d'=' -f1 | tr '\n' ':')[bf]g:exit:pwd
 
 ############# Prompt configuration #################
 
-# Show only two last directories in prompt, affect on \w and \W codes
+# Set number of direcories shown by \w prompt code
 PROMPT_DIRTRIM=2
 
-source ~/.git-prompt.sh
+if [ -f ~/.git-prompt.sh ]; then
+  . ~/.git-prompt.sh
+fi
 # Show unstaged (*) and staged (+) changes next to the branch name.
 GIT_PS1_SHOWDIRTYSTATE=1
 # If something is stashed, then a '$' will be shown next to the branch name.
@@ -34,18 +36,19 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 # Show the difference between HEAD and its upstream with number of commits ahead/behind (+/-) upstream
 GIT_PS1_SHOWUPSTREAM="auto verbose"
 
-set_prompt () {
-  # Real-time history synchronization between the terminals
+# Real-time history synchronization between the terminals
+# Call this function from prompt command if you want turn on this feature
+sync_history() {
   history -n; # Append the history lines not already read from the history file to the current history list.
   history -w; # Write out the current history list to the history file.
   history -c; # Clear the history list. This may be combined with the other options to replace the history list completely.
   history -r; # Read the history file and append its contents to the history list.
+}
 
+set_prompt () {
   gray='\[\e[37m\]'
   cyan='\[\e[36m\]'
   reset='\[\e[00m\]'
-  PS1="$gray\\w$cyan$(__git_ps1)$reset $ "
+  PS1=" $gray\\w$cyan$(__git_ps1)$reset $ "
 }
 PROMPT_COMMAND=set_prompt
-
-source ~/.git-completion.bash

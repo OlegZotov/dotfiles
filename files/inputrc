@@ -1,0 +1,3 @@
+set editing-mode vi
+set show-mode-in-prompt on
+# completion-ignore-case - case insensitive autocomplite

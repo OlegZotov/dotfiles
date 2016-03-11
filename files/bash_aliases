@@ -1,7 +1,18 @@
-alias ls='ls -Gh'
-alias l='ls -Glh'
-alias ll='ls -Gla'
-alias htop='sudo htop'
+# Listing
+alias l='ls -lhF'
+alias ll='ls -alhF'
+alias llt='ls -alhFt'
+
+# Vagrant
 alias vg='vagrant'
 alias vst='vagrant up && vagrant ssh -c "tmux -CC"'
+
+# Git
 alias g='git'
+alias gs='git status'
+alias gco='git checkout'
+
+# OS X Specific Tools
+#if [ $OS = 'mac' ]; then
+#  alias htop='sudo htop'
+#fi
