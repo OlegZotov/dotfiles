@@ -12,7 +12,7 @@ alias g='git'
 alias gs='git status'
 alias gco='git checkout'
 
-# OS X Specific Tools
-#if [ $OS = 'mac' ]; then
-#  alias htop='sudo htop'
-#fi
+ # OS X Specific Tools
+if [ $OSTYPE = 'darwin14' ]; then
+  alias htop='sudo htop'
+fi
