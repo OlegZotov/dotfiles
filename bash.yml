@@ -1,7 +1,7 @@
 ---
 - hosts: all
   tasks:
-    - copy: src={{ item }} dest=~/.{{ item }}
+    - copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }}
       with_items:
         - 'git-prompt.sh'
 
