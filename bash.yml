@@ -8,6 +8,5 @@
     - file: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} state=link force=yes
       with_items:
         - bashrc
-        - inputrc
         - bash_profile
         - bash_aliases
