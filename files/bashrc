@@ -52,3 +52,8 @@ set_prompt () {
   PS1=" $gray\\w$cyan$(__git_ps1)$reset $ "
 }
 PROMPT_COMMAND=set_prompt
+
+# Setting up bash-completion on mac os
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi

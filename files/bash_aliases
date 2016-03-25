@@ -12,7 +12,11 @@ alias g='git'
 alias gs='git status'
 alias gco='git checkout'
 
+# Docker
+alias dc='docker-compose'
+
  # OS X Specific Tools
 if [ $OSTYPE = 'darwin14' ]; then
+  alias dm='docker-machine'
   alias htop='sudo htop'
 fi
