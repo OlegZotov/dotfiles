@@ -6,6 +6,8 @@ alias llt='ls -alhFt'
 # Vagrant
 alias vg='vagrant'
 alias vst='vagrant up && vagrant ssh -c "tmux -CC"'
+alias vgs='vagrant status'
+alias vggs='vagrant global-status'
 
 # Git
 alias g='git'
