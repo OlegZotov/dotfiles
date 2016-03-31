@@ -20,5 +20,7 @@ alias dc='docker-compose'
  # OS X Specific Tools
 if [ $OSTYPE = 'darwin14' ]; then
   alias dm='docker-machine'
+  alias dc='docker-compose'
+  alias dm-up='docker-machine start dev; eval "$(docker-machine env dev)"'
   alias htop='sudo htop'
 fi
