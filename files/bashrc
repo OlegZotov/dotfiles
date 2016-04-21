@@ -57,3 +57,6 @@ PROMPT_COMMAND=set_prompt
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
+
+# Start and prepare docker machine
+dm-prepare

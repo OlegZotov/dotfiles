@@ -15,12 +15,26 @@ alias gs='git status'
 alias gco='git checkout'
 
 # Docker
+alias docker_rmi_none='docker images | grep none | tr -s " " | cut -d" " -f 3 | xargs docker rmi'
+alias docker_stop_all='docker ps -aq | xargs docker rm -f'
 alias dc='docker-compose'
+alias dimgs='docker images'
+alias docker_runit='docker run -it --rm $@'
 
- # OS X Specific Tools
+# OS X Specific Tools
 if [ $OSTYPE = 'darwin14' ]; then
   alias dm='docker-machine'
-  alias dc='docker-compose'
   alias dm-up='docker-machine start dev; eval "$(docker-machine env dev)"'
+  alias dm-reup='docker-machine restart dev; eval "$(docker-machine env dev)"'
+  dm-prepare() {
+    if [[ "$(docker-machine status dev)" != "Running" ]]; then
+      docker-machine start dev
+    fi
+    eval "$(docker-machine env dev)"
+  }
+
   alias htop='sudo htop'
 fi
+
+# Other
+alias py='python'
