@@ -12,18 +12,24 @@ alias vggs='vagrant global-status'
 
 # Git
 alias g='git'
-alias gs='git status'
+alias gs='git s'
 alias gco='git checkout'
 alias gp='git put'
 alias gpl='git pull'
+alias gcm='git cim'
+alias gdf='git diff'
+alias gdfc='git diffc'
+alias gadd='git add'
+alias gstp='git stp'
 
 # Docker
-alias docker_rmi_none='docker images | grep none | tr -s " " | cut -d" " -f 3 | xargs docker rmi'
-alias docker_stop_all='docker ps -aq | xargs docker rm -f'
+alias drmin='docker images -a | grep none | tr -s " " | cut -d" " -f 3 | xargs docker rmi'
+alias drma='docker ps -aq | xargs docker rm -f'
 alias dc='docker-compose'
-alias dimgs='docker images'
+alias dimgs='docker images -a'
 alias docker_runit='docker run -it --rm $@'
 alias docker_runit_here='docker run -v $(PWD):/app -w /app -it --rm $@'
+alias dpsa='docker ps -a'
 
 # OS X Specific Tools
 if [ $OSTYPE = 'darwin14' ]; then
@@ -42,3 +48,4 @@ fi
 
 # Other
 alias py='python'
+alias pyserv='python -m SimpleHTTPServer'
