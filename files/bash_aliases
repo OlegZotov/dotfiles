@@ -2,7 +2,6 @@
 alias l='ls -lhF'
 alias ll='ls -alhF'
 alias llt='ls -alhFt'
-alias ls='ls -lhF'
 
 # Vagrant
 alias vg='vagrant'
@@ -26,26 +25,38 @@ alias gstp='git stp'
 alias drmin='docker images -a | grep none | tr -s " " | cut -d" " -f 3 | xargs docker rmi'
 alias drma='docker ps -aq | xargs docker rm -f'
 alias dc='docker-compose'
-alias dimgs='docker images -a'
-alias docker_runit='docker run -it --rm $@'
-alias docker_runit_here='docker run -v $(PWD):/app -w /app -it --rm $@'
+alias dimgs='docker images'
+alias drun='docker run -it --rm'
+alias dvrun='docker run -v $(PWD):/app -w /app -it --rm'
 alias dpsa='docker ps -a'
+alias dstat='docker stats --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}\t{{.PIDs}}"'
+dc_bash () {
+  if [ $# -eq 1 ]
+  then
+    service=$(docker-compose config --services | head -n 1)
+    docker-compose $1 $service bash
+  else
+    docker-compose $1 $2 bash
+  fi
+}
+drbash () {
+  dc_bash run $1
+}
+debash () {
+  dc_bash exec $1
+}
 
 # OS X Specific Tools
-if [ $OSTYPE = 'darwin14' ]; then
-  alias dm='docker-machine'
-  alias dm-up='docker-machine start dev; eval "$(docker-machine env dev)"'
-  alias dm-reup='docker-machine restart dev; eval "$(docker-machine env dev)"'
-  dm-prepare() {
-    if [[ "$(docker-machine status dev)" != "Running" ]]; then
-      docker-machine start dev
-    fi
-    eval "$(docker-machine env dev)"
-  }
+if [ $OSTYPE = 'darwin14.5.0' ]; then
+  alias odocker='open -a /Applications/Docker.app/'
 
   alias htop='sudo htop'
+  alias vim="/usr/local/bin/vim"
+  alias vi="/usr/local/bin/vim"
 fi
 
 # Other
-alias py='python'
+alias py='ipython'
 alias pyserv='python -m SimpleHTTPServer'
+alias p='ping 8.8.8.8'
+alias grn='grep -irn'

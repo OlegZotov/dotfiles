@@ -13,6 +13,9 @@ shopt -s extglob
 # Appending history instead of rewriting
 shopt -s histappend
 
+# History length
+HISTFILESIZE=10000
+
 # Ignore duplicates while appending and erase duplicates from old history
 HISTCONTROL=ignoredups:erasedups
 
@@ -36,6 +39,8 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 # Show the difference between HEAD and its upstream with number of commits ahead/behind (+/-) upstream
 GIT_PS1_SHOWUPSTREAM="auto verbose"
 
+export GREP_OPTIONS='--color=always'
+
 # Real-time history synchronization between the terminals
 # Call this function from prompt command if you want turn on this feature
 sync_history() {
@@ -53,10 +58,22 @@ set_prompt () {
 }
 PROMPT_COMMAND=set_prompt
 
+############# Brew configuration #################
+
 # Setting up bash-completion on mac os
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-# Start and prepare docker machine
-dm-prepare
+# from https://gist.github.com/xuhdev/8b1b16fb802f6870729038ce3789568f
+if [ -f ~/.osx-brew-gnu-coreutils-man.sh ]; then
+  . ~/.osx-brew-gnu-coreutils-man.sh
+fi
+
+export EDITOR=vim
+
+export PATH="$PATH:`yarn global bin`"
+export PATH="~/Library/Python/2.7/bin:$PATH"
+export LC_CTYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
+unset LC_ALL
