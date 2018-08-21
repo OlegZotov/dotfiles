@@ -11,7 +11,7 @@ alias vggs='vagrant global-status'
 
 # Git
 alias g='git'
-alias gs='git s'
+alias gs='git status'
 alias gco='git checkout'
 alias gp='git put'
 alias gpl='git pull'
@@ -23,11 +23,13 @@ alias gstp='git stp'
 
 # Docker
 alias drmin='docker images -a | grep none | tr -s " " | cut -d" " -f 3 | xargs docker rmi'
-alias drma='docker ps -aq | xargs docker rm -f'
+alias drma='docker ps -aq | xargs docker rm'
+alias drmfa='docker ps -aq | xargs docker rm -f'
 alias dc='docker-compose'
 alias dimgs='docker images'
 alias drun='docker run -it --rm'
 alias dvrun='docker run -v $(PWD):/app -w /app -it --rm'
+alias dexit='docker exec -it'
 alias dpsa='docker ps -a'
 alias dstat='docker stats --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}\t{{.PIDs}}"'
 dc_bash () {
@@ -47,12 +49,11 @@ debash () {
 }
 
 # OS X Specific Tools
-if [ $OSTYPE = 'darwin14.5.0' ]; then
-  alias odocker='open -a /Applications/Docker.app/'
-
+if [ $OSTYPE = 'darwin17' ]; then
   alias htop='sudo htop'
-  alias vim="/usr/local/bin/vim"
-  alias vi="/usr/local/bin/vim"
+  alias vi="/usr/local/bin/nvim"
+  alias vim="/usr/local/bin/nvim"
+  alias nvim="/usr/local/bin/nvim"
 fi
 
 # Other

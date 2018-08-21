@@ -6,3 +6,10 @@ install_ansible:
 
 bash:
 	ansible-playbook bash.yml -i hosts/local -vv
+
+nvim:
+	ansible-playbook nvim.yml -i hosts/local -vv
+
+
+
+.PHONY: bash

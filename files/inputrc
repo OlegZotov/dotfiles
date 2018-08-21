@@ -1,0 +1,7 @@
+set editing-mode vi
+set show-mode-in-prompt on
+# set emacs-mode-string emc
+# set vi-cmd-mode-string cmd
+# set vi-ins-mode-string ins
+set completion-ignore-case on
+

@@ -4,6 +4,7 @@
     - copy: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }}
       with_items:
         - 'git-prompt.sh'
+        - 'git-completion.bash'
 
     - file: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} state=link force=yes
       with_items:
