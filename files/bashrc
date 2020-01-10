@@ -55,7 +55,7 @@ set_prompt () {
   gray='\[\e[37m\]'
   cyan='\[\e[36m\]'
   reset='\[\e[00m\]'
-  PS1=" $gray\\w$cyan$(__git_ps1)$reset $ "
+  PS1=" $gray\\w$cyan$(__git_ps1)$reset\n$ "
 }
 PROMPT_COMMAND=set_prompt
 
@@ -78,5 +78,9 @@ export PATH="~/Library/Python/2.7/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 unset LC_ALL
+
+if [ -d ~/.bin ]; then
+  export PATH="~/.bin:$PATH"
+fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
