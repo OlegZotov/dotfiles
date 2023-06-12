@@ -50,6 +50,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'janko-m/vim-test'
+Plug 'tpope/vim-abolish'
 call plug#end()
 
 " ================ General Settings Begin ==================
@@ -138,20 +139,20 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>   
-nmap <silent> <leader>ts :TestSuite<CR>  
-nmap <silent> <leader>tl :TestLast<CR>   
-nmap <silent> <leader>tg :TestVisit<CR>  
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
 " ================ Key Mappings End ==================
 
 " ================ Plugin Configuration Begin ==================
 let g:lexical#spelllang = ['en_us', 'ru_ru']
 
-" TODO prettier
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
-let g:ale_fix_on_save = 1
+" let g:ale_javascript_eslint_use_global = 1
+let g:ale_fix_on_save = 0
 " ================ Plugin Configuration End ==================
 
 " ================ Persistent Undo Begin ==================

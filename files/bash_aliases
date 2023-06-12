@@ -48,6 +48,15 @@ debash () {
   dc_bash exec $1
 }
 
+datetimestamp() {
+  if [ $# -eq 0 ]
+  then
+    echo "usage: datetimestamp dd-mm-YYYY"
+  else
+    date -j -f "%d-%m-%Y" $1 "+%s000"
+  fi
+}
+
 # OS X Specific Tools
 if [ $OSTYPE = 'darwin17' ]; then
   alias htop='sudo htop'
